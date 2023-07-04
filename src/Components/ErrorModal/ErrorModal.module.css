@@ -1,0 +1,35 @@
+.modal-overlay {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal {
+    margin: auto;
+    width: 46%;
+    height: 190px;
+    background-color: #fff;
+    z-index: 1;
+    border-radius: 20px;
+    margin-top: 12%;
+}
+
+.modal-title {
+    background: #741188;
+    color: #fff;  
+    margin: auto;
+    padding: 3px 10px;
+}
+
+.modal-body {
+    padding: 15px;
+    font-weight: bold;
+}
+
+.modal-btn button {
+    float: right;
+    margin-right: 15px;
+}
