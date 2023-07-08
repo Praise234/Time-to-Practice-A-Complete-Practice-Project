@@ -35,7 +35,7 @@ const InputElement = (props) => {
 
 
     return (
-        <div>
+        <>
             <div className={classes["input__holder"]}>
                 <div className={classes["input__container"]}>
                     <label>Username</label>
@@ -50,7 +50,7 @@ const InputElement = (props) => {
                 </div>
             </div>
             {(errorMsg !== "") && <ErrorModal errMsg = {errorMsg} onOkay = {hideErrorModal} />}
-        </div>
+        </>
     );
 }
 
