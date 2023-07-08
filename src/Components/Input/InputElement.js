@@ -1,30 +1,27 @@
 import classes from "./InputElement.module.css";
 import Button from "./Button";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ErrorModal from "../ErrorModal/ErrorModal";
 
 const InputElement = (props) => {
+    const nameInputRef = useRef();
+    const ageInputRef = useRef();
 
-    const [username, setUsername] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
-    const [age, setAge] = useState(0);
-    const usernameHandler = (event) => {
-        setUsername(event.target.value.toString());
-    }
-    const ageHandler = (event) => {
-        setAge(event.target.value.toString());
-    }
+    
     const buttonClickHandler = () => {
-        if(username === "" && age < 1){
+        const enteredUserName = nameInputRef.current.value;
+            const enteredUserAge = ageInputRef.current.value;
+        if(enteredUserName === "" && enteredUserAge < 1){
             setErrorMsg("Please enter a valid name and age (non-empty values)");
-        }else if(username === ""){
+        }else if(enteredUserName === ""){
             setErrorMsg("Please enter a valid name (non-empty value)");
-        }else if(age < 1){
+        }else if(enteredUserAge < 1){
             setErrorMsg("Please enter a valid age (> 0)");
         }else{
-            props.addNewUser({"id": (Math.random().toString()), "username": username, "age": age});
-            setUsername("");
-            setAge(0);
+            props.addNewUser({"id": (Math.random().toString()), "username": enteredUserName, "age": enteredUserAge});
+            nameInputRef.current.value = "";
+            ageInputRef.current.value = 0;
         }
     }
 
@@ -39,11 +36,11 @@ const InputElement = (props) => {
             <div className={classes["input__holder"]}>
                 <div className={classes["input__container"]}>
                     <label>Username</label>
-                    <input type="text" name= "username" value={username} onChange={usernameHandler} />
+                    <input type="text" name= "username" ref={nameInputRef} />
                 </div>
                 <div className={classes["input__container"]}>
                     <label>Age (Years)</label>
-                    <input type="number" name ="age"  value={age} onChange={ageHandler} />
+                    <input type="number" name ="age" ref={ageInputRef} />
                 </div>
                 <div className={classes["input__container"]}>
                     <Button text = {"Add User"} onButtonClick = {buttonClickHandler} />
